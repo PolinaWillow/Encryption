@@ -3,18 +3,18 @@ import 'bootstrap'
 
 import {Link} from "react-router-dom"
 
-export  const HeaderDe = ()=>{
+export  const HeaderRsaE = ()=>{
     return(
-        <nav className="navbar navbar-expand-lg navbar-light bg-light " >
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <Link to='/encription' className="navbar-brand mb-0 h2">Шифр Цезаря</Link>
+                <Link to='/rsa/encription' className="navbar-brand mb-0 h1">Шифросистема RSA</Link>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link to ='/encription' className="nav-link " aria-current="page">Шифрование</Link>
+                            <Link to ='/rsa/encription' className="nav-link active" aria-current="page">Шифрование</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to = '/description' className="nav-link active">Расшифрование</Link>
+                            <Link to = '/rsa/description' className="nav-link">Расшифрование</Link>
                         </li>
                     </ul>
                 </div>
@@ -22,7 +22,6 @@ export  const HeaderDe = ()=>{
                     <Link to='/' className="navbar-brand mb-0 h1">В начало</Link>
                 </div>
             </div>
-
         </nav>
     )
 }
