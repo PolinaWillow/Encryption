@@ -10,7 +10,7 @@ export const HomePage = () =>{
                 <Link to='/encription' className="btn btn-light mb-0 HomeBtnSize">Шифр Цезаря</Link>
             </div>
             <div>
-                <Link to='/rsa/encription' className="btn btn-light mb-0 HomeBtnSize">Шифросистема RSA</Link>
+                <Link to='/rsa' className="btn btn-light mb-0 HomeBtnSize">Шифросистема RSA</Link>
             </div>
         </div>
     )

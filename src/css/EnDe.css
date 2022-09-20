@@ -7,10 +7,14 @@
 }
 
 .HomeBtn{
+    display: flex;
     padding-top: 10%;
+    margin: auto;
 }
 .HomeBtnSize{
+    display: block;
     font-size: 2em;
-    margin-top: 2%;
+    margin: 4% auto;
+    align-content: center;
 
 }
