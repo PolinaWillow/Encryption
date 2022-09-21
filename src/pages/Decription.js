@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import 'bootstrap'
 import "../css/EnDe.css"
 import {HeaderDe} from "../components/HeaderDe";
+import {Button} from "../components/Button";
+import {InputData} from "../components/InputData";
 
 export const Decription = () =>{
     const [form, setForm] = useState({
@@ -22,7 +24,7 @@ export const Decription = () =>{
         setForm({ ...form, [event.target.name]: event.target.value })
     }
 
-    const ButDecription =() =>{
+    const ButDescription =() =>{
         let arres = Object.assign([], resultStr)
         arres.length=0
         //Полный алфавит
@@ -94,10 +96,9 @@ export const Decription = () =>{
         <div>
             <HeaderDe/>
             <div className="EnDeBody">
-                <div id = "deString">
-                    <label className="form-label">Введите строку для расшифровки</label>
-                    <input type="text" className="form-control" name = "deString" id="deInpStr" onChange={changeHandler}/>
-                </div>
+                <InputData labelText="Введите строку для расшифровки" nameInput="deString"
+                           idInput="deInpStr" onChangeFunction={changeHandler}/>
+
                 <div id = "deCheck">
                     <div>
                         <input className="form-check-input me-1" type="checkbox" onChange={changeCheckbox1}/>
@@ -108,9 +109,8 @@ export const Decription = () =>{
                         <span>Исключить 'Й'</span>
                     </div>
                 </div>
-                <div className="EnDeButton">
-                    <button type="button" className ="btn btn-light" onClick={ButDecription}>Расшифровать</button>
-                </div>
+
+                <Button nameBtn = "Расшифровать" onClickFunction = {ButDescription}/>
                 <div id = "deRes">
                     <label className="form-label">Варианты расшифровки</label>
                     <input type="text" className="form-control" name = "enRes" value={resultStr}/>

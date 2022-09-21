@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import 'bootstrap'
 import "../css/EnDe.css"
 import {HeaderEn} from "../components/HeaderEn"
+import {Button} from "../components/Button";
+import {InputData} from "../components/InputData";
 
 export const Encription = () =>{
     const [form, setForm] = useState({
@@ -85,14 +87,11 @@ export const Encription = () =>{
      <div>
          <HeaderEn/>
          <div className="EnDeBody">
-             <div id = "enString">
-                 <label className="form-label">Введите строку для шифрования</label>
-                 <input type="text" className="form-control" name = "enString" id="enInpStr" onChange={changeHandler}/>
-             </div>
-             <div id = "enCoef">
-                 <label className="form-label">Введите коэффициент шифрования</label>
-                 <input type="text" className="form-control" name = "enCoef"  onChange={changeHandler}/>
-             </div>
+             <InputData labelText="Введите строку для шифрования" nameInput="enString"
+                        idInput="enInpStr" onChangeFunction={changeHandler}/>
+             <InputData labelText="Введите коэффициент шифрования" nameInput="enCoef"
+                        idInput="enCoef" onChangeFunction={changeHandler}/>
+
              <div id = "enCheck">
                  <div>
                      <input className="form-check-input me-1" type="checkbox" onChange={changeCheckbox1}/>
@@ -103,9 +102,9 @@ export const Encription = () =>{
                      <span>Исключить 'Й'</span>
                  </div>
              </div>
-             <div className="EnDeButton">
-                 <button type="button" className ="btn btn-light" onClick={ButEncription}>Зашифровать</button>
-             </div>
+
+             <Button nameBtn = "Зашифровать" onClickFunction = {ButEncription}/>
+
              <div id = "enRes">
                  <label className="form-label">Результат шифрования</label>
                  <input type="text" className="form-control" name = "enRes" value={resultStr}/>

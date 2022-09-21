@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import 'bootstrap'
 import "../css/EnDe.css"
 import {HeaderRsa} from "../components/HeaderRsa";
+import {Button} from "../components/Button";
+import {InputData} from "../components/InputData";
 
 export const RSA = () =>{
     const [formEn, setFormEn] = useState({
@@ -51,14 +53,21 @@ export const RSA = () =>{
             'К','Л','М','Н','О','П','Р','С','Т','У','Ф',
             'Х','Ц','Ч','Ш','Щ','Ъ','Ы','Ь','Э','Ю','Я']
 
-        let code=0
+        let code=''
         let masStr = string.split('')
         for (let i=0; i<masStr.length; i++){
             //console.log(masStr[i])
-            code+= Alph.indexOf(masStr[i]);
+            code+= Alph.indexOf(masStr[i])+' ';
         }
 
         return code
+    }
+
+    function FindLetter(code){
+        const Alph = ['А','Б','В','Г','Д','Е','Ё','Ж','З','И','Й',
+            'К','Л','М','Н','О','П','Р','С','Т','У','Ф',
+            'Х','Ц','Ч','Ш','Щ','Ъ','Ы','Ь','Э','Ю','Я']
+        return Alph[code]
     }
 
     function ButEncription(){
@@ -71,34 +80,46 @@ export const RSA = () =>{
 
         let string = formEn.endeString.toUpperCase()
 
-        //Преобразование открытой строки в число
+        //Преобразование открытой строки в коды
         let codeX = FindCode_String(string)
+        let MasCode = codeX.split(' ')
 
         //Вычисление шифротекста
-        let res = Math.pow(codeX, e)%n
+        let res = ''
+        for (let i=0; i< (MasCode.length-1);i++){
+            res = res + ((Math.pow(Number(MasCode[i]), e))%m).toString()+" "
+        }
         setResultStr(res)
-
+        console.log("Шифруемое число", codeX)
+        console.log("Результат", res)
         console.log(p, q, m, n, e, d, codeX)
     }
 
     function ButDescription(){
-        let p=Number(formDe.p)
-        let q=Number(formDe.q)
+        let p=Number(formDe.p) //5
+        let q=Number(formDe.q) //4
         let m= p*q
         let n = (p-1)*(q-1)
         let e = Find_e(n) //3 //e взаимнопростое с m и n 1<e<n (отдельный алгоритм)
         let d = Find_d(n, e)//27//(1/e)%n
 
-        let code = Number(formDe.endeString)
+        let MasCode = formDe.endeString.split(' ')
+        console.log("Расшифруемое число: ", MasCode)
 
         //Преобразование с использованием закрытого ключа
-        let codeX = Math.pow(code, d)%n
-        console.log(code, codeX)
-        let res = codeX
+        let res = ''
+        let codeX=0;
+        for (let i=0; i<(MasCode.length-1);i++){
+            codeX = (Math.pow(Number(MasCode[i]), d))%m
+            console.log(Number(MasCode[i]),Math.pow(Number(MasCode[i]), d) ,codeX)
+            res = res+ FindLetter(codeX)+" "
+        }
 
+
+        console.log("Результат", res)
         setResultStr(res)
 
-        console.log(p, q, m, n, e, d, code, codeX, res)
+        console.log(p, q, m, n, e, d, res)
 
 
     }
@@ -107,25 +128,16 @@ export const RSA = () =>{
         <div>
             <HeaderRsa/>
             <div className="EnDeBody">
-                <div id = "enString">
-                    <label className="form-label">Введите строку для шифровки/расшифровки</label>
-                    <input type="text" className="form-control" name = "endeString" id="endeInpStr" onChange={changeHandler}/>
-                </div>
-                <div id = "enP">
-                    <label className="form-label">Введите p</label>
-                    <input type="text" className="form-control" name = "p" id="enP" onChange={changeHandler}/>
-                </div>
-                <div id = "enQ">
-                    <label className="form-label">Введите q</label>
-                    <input type="text" className="form-control" name = "q" id="enQ" onChange={changeHandler}/>
-                </div>
+                <InputData labelText="Введите строку для шифровки/расшифровки" nameInput="endeString"
+                           idInput="endeInpStr" onChangeFunction={changeHandler}/>
+                <InputData labelText="Введите p" nameInput="p"
+                           idInput="enP" onChangeFunction={changeHandler}/>
+                <InputData labelText="Введите q" nameInput="q"
+                           idInput="enQ" onChangeFunction={changeHandler}/>
 
-                <div className="EnDeButton">
-                    <button type="button" className ="btn btn-light" onClick={ButEncription}>Зашифровать</button>
-                </div>
-                <div className="EnDeButton">
-                    <button type="button" className ="btn btn-light" onClick={ButDescription}>Расшифровать</button>
-                </div>
+                <Button nameBtn = "Зашифровать" onClickFunction = {ButEncription}/>
+                <Button nameBtn = "Расшифровать" onClickFunction = {ButDescription}/>
+
                 <div id = "enRes">
                     <label className="form-label">Результат шифровки/расшифровки</label>
                     <input type="text" className="form-control" name = "enRes" value={resultStr}/>
