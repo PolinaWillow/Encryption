@@ -1,0 +1,30 @@
+.encription{
+    margin-top: 3%;
+    padding: 1%;
+    width: 45%;
+    display: inline-block;
+}
+
+.decription{
+    padding: 1%;
+    margin-left: 8%;
+    margin-top: 3%;
+    width: 45%;
+    display: inline-block;
+
+}
+p{
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align:justify;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: .375rem;
+}
